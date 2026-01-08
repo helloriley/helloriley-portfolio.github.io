@@ -85,9 +85,13 @@ export function FeatureSolutionSection(solutionProps: ISolutionProps) {
                       
                       <div className="relative w-full overflow-visible">
                         <img
-                          className="relative z-0 h-auto w-full max-w-full rounded-lg object-contain object-center md:h-[550px] border-4 border-blue-gray-50/70 shadow-lg"
+                          className="relative z-0 h-auto w-full max-w-full rounded-lg object-contain object-center md:h-[550px] border-4 border-blue-gray-50/70 shadow-lg hover:cursor-pointer"
                           src={baseURL + gallery[galleryActiveIndex]?.src}
                           alt=""
+                          onClick={() => {
+                            const shiftIndex = galleryActiveIndex == gallery.length - 1 ? 0 : galleryActiveIndex + 1; 
+                            setGalleryActiveIndex(shiftIndex);
+                          }}
                         />
                       
                         <div className="absolute bottom-4 left-1/2 z-50 flex -translate-x-1/2 gap-3 pointer-events-auto">

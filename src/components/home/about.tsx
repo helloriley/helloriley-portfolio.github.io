@@ -1,6 +1,8 @@
 import React from "react";
 import { Card, CardBody, Typography } from "@material-tailwind/react";
 
+const baseURL = import.meta.env.BASE_URL || "/portfolio";
+
 function FeatureCard({ icon, title, children }) {
   return (
     <Card color="transparent" shadow={true}>
@@ -27,7 +29,7 @@ function FeatureCard({ icon, title, children }) {
 const features = [
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon1.png" />
+      <img className="w-32 mx-auto mb-4" src={baseURL + "/icon1.png"} />
     ),
     title: "Design",
     description:
@@ -35,7 +37,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon2.png" />
+      <img className="w-32 mx-auto mb-4" src={baseURL + "/icon2.png"} />
     ),
     title: "Development",
     description:
@@ -43,7 +45,7 @@ const features = [
   },
   {
     icon: (
-      <img className="w-32 mx-auto mb-4" src="icon3.png" />
+      <img className="w-32 mx-auto mb-4" src={baseURL + "/icon3.png"} />
     ),
     title: "Strategy",
     description:

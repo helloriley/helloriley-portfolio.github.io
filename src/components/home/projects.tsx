@@ -17,7 +17,7 @@ function ProjectCard({...props} : IProjectCollection) {
     <a href={baseURL + project.link}>
       <Card color="transparent" shadow={true} className="mt-6 hover:shadow-lg hover:shadow-blue-gray-800/20">
         <CardHeader floated={true} className="h-70 w-70 relative">
-          <img src={baseURL +project.featureimg} alt={project.title} className="h-64 w-full object-cover object-top border-t-2 border-gray-50"/>
+          <img src={baseURL + project.featureimg} alt={project.title} className="h-64 w-full object-cover object-top border-t-2 border-gray-50"/>
         </CardHeader>
         <CardBody>
           <Typography variant="h5" color="blue-gray-900" className="transition-colors hover:text-blue-500">

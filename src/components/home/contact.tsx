@@ -7,6 +7,7 @@ import {
   Textarea,
   Typography,
 } from "@material-tailwind/react";
+import { actions } from "astro:actions";
 
 export function ContactSection() {
   return (
@@ -69,7 +70,7 @@ export function ContactSection() {
             </a>
           </div>
           <form
-            action="#"
+            action={actions.send} method="POST"
             className="flex flex-col gap-12 p-2 lg:max-w-xl"
           >
             <div className="grid grid-cols-2 gap-6">
@@ -101,7 +102,7 @@ export function ContactSection() {
               size="lg"
               variant="static"
               label="Your Email"
-              name="first-name"
+              name="from-email"
               placeholder="eg. tonystark@mail.com"
               containerProps={{
                 className: "!min-w-full",
@@ -111,8 +112,8 @@ export function ContactSection() {
                 rows={2}
                 color="gray"
                 placeholder="What improvements or solutions would you like to work on?"
-                name="message"
-                className="focus:border-t-gray-900"
+                name="from-message"
+                className="border border-blue-gray-200 border-t-blue-gray-200 focus:border-2 focus:border-blue-gray-900 focus:border-t-blue-gray-900"
                 containerProps={{
                   className: "!min-w-full",
                 }}
