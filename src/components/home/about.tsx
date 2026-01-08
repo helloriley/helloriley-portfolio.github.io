@@ -55,7 +55,7 @@ const features = [
 
 export function FeatureAbout() {
   return (
-    <section id="about" className="px-4 py-10">
+    <section id="about" className="py-8 px-8 lg:py-14">
       <div className="container mx-auto mb-20 text-center">
         <Typography color="dark" className="mb-2 font-bold text-lg uppercase">
           <span className="text-blue">Skills</span>

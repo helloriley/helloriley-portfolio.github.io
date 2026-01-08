@@ -1,4 +1,4 @@
-import React from "react";
+import React, {useState, useMemo} from "react";
 import {
   Button,
   Card,
@@ -9,7 +9,13 @@ import {
 } from "@material-tailwind/react";
 import { actions } from "astro:actions";
 
+// Note: Override fix for TextArea border focus issue in contact form below.
+
 export function ContactSection() {
+  const [email, setEmail] = useState('');
+  const [emailsent, setEmailSent] = useState(false);
+  const emailIsValid = useMemo(() => /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email), [email]);
+
   return (
     <section id="contact" className="px-8 py-10 lg:py-16">
       <div className="container mx-auto mb-10 text-center lg:mb-20">
@@ -97,34 +103,54 @@ export function ContactSection() {
                 }}
               />
             </div>
-            <Input
-              color="gray"
-              size="lg"
-              variant="static"
-              label="Your Email"
-              name="from-email"
-              placeholder="eg. tonystark@mail.com"
-              containerProps={{
-                className: "!min-w-full",
-              }}
-            />
-            <Textarea
-                rows={2}
+            <div>
+              <Input
                 color="gray"
-                placeholder="What improvements or solutions would you like to work on?"
-                name="from-message"
-                className="border border-blue-gray-200 border-t-blue-gray-200 focus:border-2 focus:border-blue-gray-900 focus:border-t-blue-gray-900"
+                size="lg"
+                variant="static"
+                label="Your Email *"
+                name="from-email"
+                type="email"
+                placeholder="eg. tonystark@mail.com"
+                value={email}
+                onChange={(e) => setEmail((e.target as HTMLInputElement).value)}
                 containerProps={{
                   className: "!min-w-full",
                 }}
-                labelProps={{
-                  className: "hidden",
-                }}
               />
-            <div className="flex w-full !justify-end">
-              <Button className="w-full md:w-fit hover:bg-blue-gray-800" color="gray">
-                Send message
-              </Button>
+              {/* simple inline validation message */}
+              <Typography variant="small" color={email ? (emailIsValid ? "blue" : "red") : "gray"} className="mt-1">
+                {email ? (emailIsValid ? "Email looks good" : "Enter a valid email address") : "Will use this email to contact you"}
+              </Typography>
+            </div>            
+            <Textarea
+              rows={2}
+              color="gray"
+              placeholder="What improvements or solutions would you like to work on?"
+              name="from-message"
+              className="placeholder:border-none border-none focus:border-none placeholder:outline-1 placeholder:outline-blue-gray-200 outline-1 outline-blue-gray-200 focus:outline-2 focus:outline-gray-900 "
+              containerProps={{
+                className: "!min-w-full",
+              }}
+              labelProps={{
+                className: "hidden",
+              }}
+            />
+            <div className="grid grid-cols-2 gap-6">
+              <Typography variant="small" color="blue-gray" className="mt-1">
+                {emailsent ? "Thank you! Your message has been sent. We'll get back to you soon." : ""}
+              </Typography>
+              <div className="flex w-full !justify-end">
+                <Button
+                  type="submit"
+                  disabled={!emailIsValid}
+                  className={`w-full md:w-fit ${!emailIsValid ? "opacity-60 pointer-events-none" : "hover:bg-blue-gray-800"}`}
+                  color="gray"
+                  onClick={() => setEmailSent(true)}
+                >
+                  Send message
+                </Button>
+              </div>
             </div>
           </form>
         </CardBody>
